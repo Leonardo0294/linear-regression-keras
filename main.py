@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 # Lectura de los datos desde el archivo CSV
 data = pd.read_csv('altura_peso.csv')
 
-# Separar las columnas en variables independientes (x) y dependientes (y)
-x = data['Altura'].values.reshape(-1, 1)  # Altura
-y = data['Peso'].values  # Peso
+# se separan columnas en variables independientes (x) y dependientes (y)
+x = data['Altura'].values.reshape(-1, 1)  
+y = data['Peso'].values  
 
-# Dividir los datos en conjuntos de entrenamiento y prueba
+# Se dividen los datos en conjuntos de entrenamiento y prueba
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
 # Crear el modelo de regresión lineal con Keras
@@ -23,7 +23,7 @@ model.add(Dense(1, input_dim=1, activation='linear'))
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 # Entrenar el modelo
-model.fit(x_train, y_train, epochs=100, verbose=1)
+model.fit(x_train, y_train, epochs=2000, verbose=1)
 
 # Evaluar el modelo
 loss = model.evaluate(x_test, y_test)
@@ -38,7 +38,7 @@ plt.ylabel('Peso')
 plt.legend()
 plt.show()
 
-# Realizar predicciones con nuevas alturas
+# se realizan predicciones con nuevas alturas
 new_heights = np.array([160, 170, 180]).reshape(-1, 1)
 predicted_weights = model.predict(new_heights)
 print(f'Alturas: {new_heights.flatten()}')
